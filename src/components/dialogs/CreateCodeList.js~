@@ -1,0 +1,41 @@
+import React from 'react'
+
+import { Button,TextField} from 'material-ui';
+
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+
+
+export default props =>
+  <Dialog
+     open={this.state.open}
+     onClose={this.handleClose}
+    aria-labelledby="form-dialog-title"
+  >
+   <DialogTitle id="form-dialog-title">
+     Enter new user code table
+   </DialogTitle>
+  <DialogContent>
+    <DialogContentText>
+      Please enter form to create new code list...
+    </DialogContentText>
+    <TextField
+       autoFocus
+       margin="dense"
+       id="name"
+       label="Email Address"
+       type="email"
+       fullWidth
+    />
+  </DialogContent>
+
+  <DialogActions>
+    <Button onClick(()=>{alert('tu sam'); }  color="primary">
+       Create
+    </Button>
+</DialogActions>
+</Dialog>

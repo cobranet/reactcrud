@@ -1,0 +1,51 @@
+import React, { Component,Fragment } from 'react';
+import Header from './components/layouts/Header.js'
+import Footer from './components/layouts/Footer.js'
+import MainWnd from './components/main/MainWnd.js'
+import {codelist_types,codelists} from './store.js'
+class App extends Component {
+  state = {
+    codelists,
+    ltype: '',
+    list:   {}
+    
+  }
+
+  getCodeList(){
+
+    return Object.entries(this.state.codelists.reduce(
+      (lists,list)=>{
+        if ( lists[list.ltype] === undefined  ){
+          lists[list.ltype] = [list]
+        } else {
+          lists[list.ltype].push(list)
+        }
+        return lists
+          },{})); 
+      
+  }
+
+  handleListSelect = (code)=>{
+    this.setState( (prevState)=>{
+      return {list: prevState.codelists.find( (l) => { return l.id === code} )}
+    });
+  }
+  
+  handleLtypeSelect = (ltype)=>{
+    this.setState( {ltype: ltype});
+  }
+  
+  render() {
+    const codelists = this.getCodeList();
+    return (
+      <Fragment>
+      <Header/>
+
+        <MainWnd list={this.state.list} onSelect={this.handleListSelect} codelists={codelists} ltype={this.state.ltype} />  
+        <Footer ltype={this.state.ltype} onSelect={this.handleLtypeSelect} codelist_types={codelist_types} />
+      </Fragment>
+    )
+  }
+}
+
+export default App;
